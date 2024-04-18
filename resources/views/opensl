@@ -1,0 +1,25 @@
+<?php
+
+// Generate an RSA key pair
+$keyPair = openssl_pkey_new([
+    'private_key_bits' => 2048,
+    'private_key_type' => OPENSSL_KEYTYPE_RSA,
+]);
+
+// Get private key
+openssl_pkey_export($keyPair, $privateKey);
+
+// Get public key
+$publicKeyDetails = openssl_pkey_get_details($keyPair);
+$publicKey = $publicKeyDetails['key'];
+
+// Display keys
+echo "Private Key:\n";
+echo $privateKey . "\n\n";
+
+echo "Public Key:\n";
+echo $publicKey . "\n";
+
+?>
+
+Ensure that the OpenSSL extension is enabled in your PHP configuration (php.ini) for this script to work. You can check if the extension is enabled by looking for extension=openssl in your php.ini file.
